@@ -1,0 +1,26 @@
+<div class="container">
+    <div class="headerContainer">
+        <div routerLink="/" class="homeIcon">
+            <p id="backArrow"><fa-icon (click)="navigateBack()" class="iconItem" [icon]="faArrow"></fa-icon></p>
+            <h3 id="homeText">Github Search</h3>
+        </div>
+        <div class="navOptions">
+            <div class="searchContainer">
+                <input type="text" ngClass="searchField" name="searchString" (keyup.enter)="makeSearchDataRequest()" [(ngModel)]="searchString" placeholder="Search...">
+                <p><fa-icon (click)="showFitlerOptions()" class="iconItem" [icon]="faFilter"></fa-icon></p>
+            </div>
+            <div routerLink="about" *ngIf="!hasRoute('/about')" class="btn">
+                <p>About</p>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="showFilterOptions" class="filterOptContainer">
+        <div (click)="changeSearchType('Users')" [ngClass]="{'highlightit' : searchType === 'Users'}" class="filterOpt">
+            <p>Users</p>
+        </div>
+        <div (click)="changeSearchType('Repos')" [ngClass]="{'highlightit' : searchType === 'Repos'}" class="filterOpt">
+            <p>Repositories</p>
+        </div>
+    </div>
+    
+</div>
