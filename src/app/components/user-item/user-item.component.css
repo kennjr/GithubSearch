@@ -1,0 +1,45 @@
+.userItemContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.avatarContainer{
+    margin: 5px 20px;
+    justify-content: center;
+}
+
+.avatarContainer > img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.userInfoContainer > p{
+    margin: 5px 10px;
+}
+
+.userFollowInfo{
+    display: flex;
+    flex-direction: row;
+    margin: 5px 10px;
+    text-align: center;
+    justify-content: space-around;
+}
+
+.userFollowInfo > p{
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#userItem_username{
+    /* font-weight: bold; */
+    font-weight: 700;
+    font-size: 19px;
+}
+
+#userItem_email{
+    /* font-weight: bold; */
+    font-weight: 500;
+    font-size: 17px;
+}
