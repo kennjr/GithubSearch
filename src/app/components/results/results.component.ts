@@ -1,13 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Repo } from 'src/app/models/Repo';
 import { User } from 'src/app/models/User';
+import { SearchService } from 'src/app/services/search.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.css']
 })
-export class ResultsComponent implements OnInit {
+export class ResultsComponent implements OnInit, OnDestroy {
+
+  searchResults:any[] = []
 
   testUser:User = {
     html_url:"https://github.com/kennjr",
@@ -28,9 +32,24 @@ export class ResultsComponent implements OnInit {
     last_update:"Today"
   }
 
-  constructor() { }
+  constructor(private searchservice :SearchService) { }
 
   ngOnInit(): void {
+    this.getSearchResults()
+  }
+
+  subscription!: Subscription;
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    throw new Error('Method not implemented.');
+  }
+
+  getSearchResults (){
+    this.subscription = this.searchservice.getSearchResults().subscribe((response : any) => {
+      console.log("The list is " + response)
+      this.searchResults.push(...response)
+    })
   }
 
 }
