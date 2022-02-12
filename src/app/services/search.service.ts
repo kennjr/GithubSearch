@@ -18,13 +18,16 @@ export class SearchService {
 
   searchType:string = "Users";
   resultsList = new BehaviorSubject<any>([]);
+  resultsCount = new BehaviorSubject<any>(0);
 
   makeSearchRequest (searchstring :string){
     let url = this.createSearchUrl(searchstring)
     if(url != ""){
       this.httpClient.get(url, httpOptions).subscribe((response :any) => {
-        console.log("This is the data " + response.data)
-        this.resultsList.next(response.data);
+        if(!response.incomplete_results){
+          this.resultsCount.next(response.total_count)
+          this.resultsList.next(response.items);
+        }
       })
     }
   }
@@ -37,12 +40,18 @@ export class SearchService {
     }else if(this.searchType === "Repos"){
       searchUrl = `https://api.github.com/search/repositories?q=${trimmedSearchString}`;
     }
+
+    console.log("The type is " + this.searchType)
     
     return searchUrl;
   }
 
   getSearchResults (){
     return this.resultsList.asObservable()
+  }
+
+  getResultsCount (){
+    return this.resultsCount.asObservable()
   }
 
   updateSearchType(newType :string){
