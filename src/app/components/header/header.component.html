@@ -1,11 +1,11 @@
 <div class="container">
     <div class="headerContainer">
         <div routerLink="/" class="homeIcon">
-            <p id="backArrow"><fa-icon (click)="navigateBack()" class="iconItem" [icon]="faArrow"></fa-icon></p>
+            <p *ngIf="!hasRoute('/')" id="backArrow"><fa-icon (click)="navigateBack()" class="iconItem" [icon]="faArrow"></fa-icon></p>
             <h3 id="homeText">Github Search</h3>
         </div>
         <div class="navOptions">
-            <div class="searchContainer">
+            <div *ngIf="hasRoute('/')" class="searchContainer">
                 <input type="text" ngClass="searchField" name="searchString" (keyup.enter)="makeSearchDataRequest()" [(ngModel)]="searchString" placeholder="Search...">
                 <p><fa-icon (click)="showFitlerOptions()" class="iconItem" [icon]="faFilter"></fa-icon></p>
             </div>
