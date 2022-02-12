@@ -1,16 +1,34 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './components/header/header.component';
+import { AboutComponent } from './components/about/about.component';
+import { ResultsComponent } from './components/results/results.component';
+import { UserItemComponent } from './components/user-item/user-item.component';
+import { RepoItemComponent } from './components/repo-item/repo-item.component';
+import { UserPipe } from './pipes/user.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    AboutComponent,
+    ResultsComponent,
+    UserItemComponent,
+    RepoItemComponent,
+    UserPipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    AppRoutingModule,
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

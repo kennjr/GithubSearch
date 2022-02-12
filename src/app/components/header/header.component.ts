@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
+import { SearchService } from 'src/app/services/search.service';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -19,7 +21,7 @@ export class HeaderComponent implements OnInit {
 
   searchString = "";
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private searchservice: SearchService) { }
 
   ngOnInit(): void {
   }
@@ -34,8 +36,8 @@ export class HeaderComponent implements OnInit {
 
   // For making the search request based on the searchstring
   makeSearchDataRequest(){
-    if(this.searchString !== ""){
-      console.log("Make a request " + this.searchString)
+    if(this.searchString !== "" && (this.searchType === "Users" || this.searchType === "Repos")){
+      this.searchservice.makeSearchRequest(this.searchString)
     }
   }
 
@@ -46,6 +48,7 @@ export class HeaderComponent implements OnInit {
   changeSearchType (newType: string){
     if(newType == "Users" || newType == "Repos"){
       this.searchType = newType;
+      this.searchservice.updateSearchType(newType)
     }
   }
   

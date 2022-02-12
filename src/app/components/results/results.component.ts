@@ -48,7 +48,7 @@ export class ResultsComponent implements OnInit, OnDestroy {
   getSearchResults (){
     this.subscription = this.searchservice.getSearchResults().subscribe((response : any) => {
       console.log("The list is " + response)
-      this.searchResults.push(...response)
+      this.searchResults.push(...response.items)
     })
   }
 
