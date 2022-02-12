@@ -1,0 +1,16 @@
+<div class="userItemContainer">
+    <div class="userInfoContainer">
+        <p id="userItem_username">{{repo.repo_name}}</p>
+        <p id="userItem_email">{{repo.repo_description}}</p>
+        <div class="userFollowInfo">
+            <p><fa-icon [icon]="faStar">{{repo.stars_count}}</fa-icon>></p>
+            <p>&#8226;</p>
+            <p>{{repo.major_lang}}</p>
+            <p>&#8226;</p>
+            <p>Updated {{repo.last_update}}</p>
+        </div>
+        
+    </div>
+</div>
+<div class="divider" [ngStyle]="{'margin-bottom':'25px', 'margin-left':'50px',  'margin-right':'30px'}"></div>
+
