@@ -13,25 +13,62 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
 
   api_url!:string;
   user!:any;
+  reposList :any[] = []
+  followersList :any[] = []
+  followingList :any[] = []
+
   userInfoSubscription! :Subscription;
+  followersSubscription! :Subscription;
+  followingSubscription! :Subscription;
+  reposSubscription! :Subscription;
+
+  currentlyVisibleList = "Repos";
 
   constructor(private route: ActivatedRoute, private userstaservice: UserStatsService) { }
 
 
   ngOnDestroy(): void {
     this.userInfoSubscription.unsubscribe();
-    throw new Error('Method not implemented.');
+    this.followersSubscription.unsubscribe();
+    this.followingSubscription.unsubscribe();
+    this.reposSubscription.unsubscribe();
   }
 
   ngOnInit(): void {
     this.api_url = this.route.snapshot.paramMap.get('api_url')!;
     this.userstaservice.retrieveUserInfo(this.api_url);
     this.getInfo()
+
+    this.getReposList()
+    this.getFollowersList()
+    this.getFollowingList ()
   }
 
   getInfo (){
     this.userInfoSubscription = this.userstaservice.getUserInfo().subscribe((response) => {
       this.user = response;
+      this.userstaservice.retrieveRepos(response.repos_url)
+      this.userstaservice.retrieveFollowers(response.followers_url)
+      
+      this.userstaservice.retrieveFollowing(response.following_url)
+    })
+  }
+
+  getReposList (){
+    this.userstaservice.getReposList().subscribe((response) => {
+      this.reposList = response;
+    })
+  }
+
+  getFollowersList (){
+    this.userstaservice.getFollowers().subscribe((response) => {
+      this.followersList = response;
+    })
+  }
+
+  getFollowingList (){
+    this.userstaservice.getFollowing().subscribe((response) => {
+      this.followingList = response;
     })
   }
 
