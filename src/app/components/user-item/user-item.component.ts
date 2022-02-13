@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { User } from 'src/app/models/User';
 
 @Component({
@@ -9,10 +9,19 @@ import { User } from 'src/app/models/User';
 export class UserItemComponent implements OnInit {
 
   @Input() user!:any;
+  @Output() onViewDetailsRequest :EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  viewDetails(){
+    this.onViewDetailsRequest.emit(this.user)
+  }
+
+  openInGithub(){
+    window.open(this.user.html_url, "_blank")
   }
 
 }
