@@ -4,17 +4,17 @@
         <p>{{user.login}}</p>
         <div class="userListOptions">
             <div class="userListOpt" (click)="changeVisibleList ('Followers')">
-                <p>{{followersList.length}} followers</p>
+                <p class="infoText">{{followersList.length}} followers</p>
                 <div [ngClass]="{highlightline :currentlyVisibleList === 'Followers'}"></div>
             </div>
             <p>&#8226;</p>
             <div class="userListOpt" (click)="changeVisibleList ('Following')">
-                <p>{{followingList.length}} following</p>
+                <p class="infoText">{{followingList.length}} following</p>
                 <div [ngClass]="{highlightline :currentlyVisibleList === 'Following'}"></div>
             </div>
             <p>&#8226;</p>
             <div class="userListOpt" (click)="changeVisibleList ('Repos')">
-                <p>{{reposList.length}} repos</p>
+                <p class="infoText">{{reposList.length}} repos</p>
                 <div [ngClass]="{highlightline :currentlyVisibleList === 'Repos'}"></div>
             </div>
         </div>

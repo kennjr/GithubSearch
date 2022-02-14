@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { environment } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 import { BehaviorSubject, lastValueFrom } from 'rxjs';
 
 const httpOptions = {
   headers : new HttpHeaders({
-    // "Authorization": environment.access_token
+    "Authorization": environment.access_token
   })
 }
 
