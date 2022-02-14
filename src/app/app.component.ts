@@ -8,9 +8,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'GithubSearch';
 
-  backNavigationRequest(status: boolean){
-    if(status){
-      // Navigate to the prev. frag.
-    }
-  }
 }

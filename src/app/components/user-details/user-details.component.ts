@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { UserStatsService } from 'src/app/services/user-stats.service';
-import { User } from 'src/app/models/User';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -72,4 +71,13 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     })
   }
 
+  changeVisibleList(str :string){
+    if(str != "" && this.currentlyVisibleList !== str){
+      this.currentlyVisibleList = str;
+    }
+  }
+
+  goToLink(url: string){
+    window.open(url, "_blank");
+  }
 }

@@ -12,6 +12,10 @@ import { ResultsComponent } from './components/results/results.component';
 import { UserItemComponent } from './components/user-item/user-item.component';
 import { RepoItemComponent } from './components/repo-item/repo-item.component';
 import { UserPipe } from './pipes/user.pipe';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { UnderlineDirective } from './directives/underline.directive';
+import { RepoPipe } from './pipes/repo.pipe';
+import { ElapsedTimePipe } from './pipes/elapsed-time.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +25,11 @@ import { UserPipe } from './pipes/user.pipe';
     ResultsComponent,
     UserItemComponent,
     RepoItemComponent,
-    UserPipe
+    UserPipe,
+    UserDetailsComponent,
+    UnderlineDirective,
+    RepoPipe,
+    ElapsedTimePipe
   ],
   imports: [
     BrowserModule,

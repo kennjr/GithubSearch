@@ -13,7 +13,8 @@ export class RepoPipe implements PipeTransform {
       major_lang:value.language,
       repo_description:value.description,
       created_at:value.created_at,
-      updated_at:value.updated_at
+      updated_at:value.updated_at,
+      owner:value.owner.login
     }
     return repo;
   }

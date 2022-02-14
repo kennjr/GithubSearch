@@ -9,7 +9,7 @@
                 <input type="text" ngClass="searchField" name="searchString" (keyup.enter)="makeSearchDataRequest()" [(ngModel)]="searchString" placeholder="Search...">
                 <p><fa-icon (click)="showFitlerOptions()" class="iconItem" [icon]="faFilter"></fa-icon></p>
             </div>
-            <div routerLink="about" *ngIf="!hasRoute('/about')" class="btn">
+            <div routerLink="about" *ngIf="hasRoute('/')" class="btn aboutlink">
                 <p>About</p>
             </div>
         </div>
@@ -21,6 +21,8 @@
         <div (click)="changeSearchType('Repos')" [ngClass]="{'highlightit' : searchType === 'Repos'}" class="filterOpt">
             <p>Repositories</p>
         </div>
+        <p class="closeFilterOptionsIcon"><fa-icon (click)="showFitlerOptions()" class="iconItem" [icon]="faTimes"></fa-icon></p>
     </div>
+    
     
 </div>

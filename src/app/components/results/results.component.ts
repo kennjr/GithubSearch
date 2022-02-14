@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Repo } from 'src/app/models/Repo';
-import { User } from 'src/app/models/User';
+import { Router } from '@angular/router';
 import { SearchService } from 'src/app/services/search.service';
 import { Subscription } from 'rxjs';
 
@@ -12,43 +11,58 @@ import { Subscription } from 'rxjs';
 export class ResultsComponent implements OnInit, OnDestroy {
 
   searchResults:any[] = []
+  searchType: string = "Users";
+  message = "";
 
-  testUser:User = {
-    html_url:"https://github.com/kennjr",
-    avatar_url:"https://avatars.githubusercontent.com/u/93252545?v=4",
-    username:"kennjr",
-    email:"kenjr@emails.com",
-    followers_count:20,
-    following_count:12,
-    public_repo_count:23
-  }
-
-  testRepo: Repo = {
-    repo_name:"GifsApp",
-    repo_description:"An app that makes use of the giphy api to make queries for gifs",
-    repo_url:"http://myhechar.pro",
-    stars_count:500,
-    major_lang:"TypeScript",
-    last_update:"Today"
-  }
-
-  constructor(private searchservice :SearchService) { }
+  constructor(private searchservice :SearchService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getSearchResults()
+    this.getSearchResults();
+    this.getMyData();
+    this.getSearchType();
+    this.getMessage()
   }
 
   subscription!: Subscription;
+  searchTypeSub!: Subscription;
+  messageSub!: Subscription;
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-    throw new Error('Method not implemented.');
+    this.searchTypeSub.unsubscribe();
+    this.messageSub.unsubscribe();
+    // throw new Error('Method not implemented.');
   }
 
   getSearchResults (){
     this.subscription = this.searchservice.getSearchResults().subscribe((response : any) => {
-      console.log("The list is " + response)
-      this.searchResults.push(...response.items)
+      this.searchResults = response;
+    })
+  }
+
+  getMyData (){
+    this.searchservice.getMyData()
+  }
+
+  navigateToDetailsView(user: any){
+    this.router.navigate(['/users', user.api_url]);
+  }
+
+  getSearchType (){
+    this.searchTypeSub = this.searchservice.getExternalSearchType().subscribe((type:any) => {
+      // console.log("The type has changed " + type);
+      if(type != ""){
+        this.searchType = type;
+        this.searchResults = []
+        // console.log("The type has changed confirm" + this.searchType);
+      }
+    })
+  }
+
+  getMessage(){
+    this.messageSub = this.searchservice.getMessageFromServer().subscribe((message) => {
+      this.message = message;
+      console.log("The message is " + this.message);
     })
   }
 

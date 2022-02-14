@@ -1,6 +1,12 @@
 .userItemContainer{
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    width: 80%;
+}
+
+.userItemContainer:hover{
+    cursor: pointer;
 }
 
 .avatarContainer{
@@ -18,20 +24,6 @@
     margin: 5px 10px;
 }
 
-.userFollowInfo{
-    display: flex;
-    flex-direction: row;
-    margin: 5px 10px;
-    text-align: center;
-    justify-content: space-around;
-}
-
-.userFollowInfo > p{
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
 #userItem_username{
     /* font-weight: bold; */
     font-weight: 700;
@@ -42,4 +34,15 @@
     /* font-weight: bold; */
     font-weight: 500;
     font-size: 17px;
+}
+
+.align-vertically-space-between{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.underlinetxt:hover{
+    text-decoration: underline;
+    cursor: pointer;
 }

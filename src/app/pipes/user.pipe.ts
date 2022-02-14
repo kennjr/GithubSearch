@@ -12,11 +12,12 @@ export class UserPipe implements PipeTransform {
       html_url:value.html_url,
       avatar_url:value.avatar_url,
       username:value.login,
-      email:"user@emails.com",
-      followers_count:20,
-      following_count:12,
-      public_repo_count:23
+      followers_url:value.followers_url,
+      following_url:value.following_url,
+      repos_url:value.repos_url,
+      api_url:value.url
     }
+
     return testUser;
   }
 

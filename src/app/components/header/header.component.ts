@@ -1,27 +1,29 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { faFilter } from '@fortawesome/free-solid-svg-icons';
+import { faFilter , faTimes} from '@fortawesome/free-solid-svg-icons';
+import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
+  providers: [Location, {provide: LocationStrategy, useClass: PathLocationStrategy}]
 })
 export class HeaderComponent implements OnInit {
 
   faArrow = faArrowLeft;
   faFilter = faFilter;
-  @Output() onNavigateBack :EventEmitter<boolean> = new EventEmitter();
+  faTimes = faTimes;
 
   showFilterOptions = false;
   searchType = "Users"
 
   searchString = "";
 
-  constructor(private router:Router, private searchservice: SearchService) { }
+  constructor(private router:Router, private searchservice: SearchService, private location: Location) { }
 
   ngOnInit(): void {
   }
@@ -31,7 +33,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateBack(){
-    this.onNavigateBack.emit(true);
+    this.goBack()
   }
 
   // For making the search request based on the searchstring
@@ -50,6 +52,10 @@ export class HeaderComponent implements OnInit {
       this.searchType = newType;
       this.searchservice.updateSearchType(newType)
     }
+  }
+
+  goBack() {
+    this.location.back();
   }
   
 }

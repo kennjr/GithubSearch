@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Repo } from 'src/app/models/Repo';
-import { faStar } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-repo-item',
@@ -9,12 +7,15 @@ import { faStar } from '@fortawesome/free-regular-svg-icons';
 })
 export class RepoItemComponent implements OnInit {
 
-  @Input() repo!:Repo;
-  faStar = faStar;
+  @Input() repo!:any;
 
   constructor() { }
 
   ngOnInit(): void {
+  } 
+
+  goToLink(){
+    window.open(this.repo.html_url, "_blank");
   }
 
 }

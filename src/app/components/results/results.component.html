@@ -1,6 +1,13 @@
 <div class="container">
-    
-    <div *ngFor="let user of searchResults">
-        <app-user-item [user]="user|user"></app-user-item>
+    <p [ngStyle]="{'margin-bottom':'auto', 'margin-left':'auto', 'margin-right':'auto', 'margin-top':'auto'}">{{message}}</p>
+    <div *ngIf="searchType === 'Users'">
+        <div *ngFor="let user of searchResults">
+            <app-user-item [user]="user|user" (onViewDetailsRequest)="navigateToDetailsView($event)"></app-user-item>
+        </div>
+    </div>
+    <div *ngIf="searchType === 'Repos'">
+        <div *ngFor="let repo_item of searchResults">
+            <app-repo-item [repo]="repo_item|repo"></app-repo-item>
+        </div>
     </div>
 </div>

@@ -100,8 +100,25 @@
 .filterOptContainer{
     display: flex;
     flex-direction: row;
-    margin: 0px 20px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
     background-color: white;
+}
+
+/* .filtersDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+} */
+
+.closeFilterOptionsIcon{
+    font-size: 20px;
+    font-weight: 200;
+    margin-left: auto;
+    margin-right: 20px;
+    color: grey;
 }
 
 .filterOpt{

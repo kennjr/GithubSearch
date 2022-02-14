@@ -29,10 +29,9 @@
 .mainAboutSection{
     padding-left: 20px;
     padding-right: 20px;
-    padding-top: 20px;
+    padding-top: 10px;
     padding-bottom: 10px;
     font-size: 16px;
-
 }
 
 .smallFont{
@@ -76,6 +75,11 @@
     flex-direction: row;
     justify-content: flex-start;
     margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.repo_lang{
+    margin-bottom: 5px;
 }
 
 .followInfoContainer > img{
@@ -109,13 +113,13 @@
 .list{
     list-style-type: none;
     margin: 10px 0px;
-
 }
 
 /* The styling block below will style all the elements except for the last element of the same type */
 .list:not(:last-of-type){
     border-bottom: 1px solid #ddd;
 }
+
 
 /* Styling for the phone */
 @media only screen and (max-width: 640px) { 
