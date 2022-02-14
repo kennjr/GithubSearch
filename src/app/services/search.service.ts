@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+// import { environment } from 'src/environments/environment';
 import { BehaviorSubject, lastValueFrom } from 'rxjs';
 
 const httpOptions = {
   headers : new HttpHeaders({
-    "Authorization": environment.access_token
+    // "Authorization": environment.access_token
   })
 }
 
@@ -57,10 +57,7 @@ export class SearchService {
       searchUrl = `https://api.github.com/search/users?q=${trimmedSearchString}`;
     }else if(this.searchType === "Repos"){
       searchUrl = `https://api.github.com/search/repositories?q=${trimmedSearchString}`;
-    }
-
-    console.log("The type is " + this.searchType)
-    
+    }    
     return searchUrl;
   }
 
@@ -87,5 +84,31 @@ export class SearchService {
     return this.messageFromServer.asObservable();
   }
   
+  getMyData (){
+    this.messageFromServer.next("Loading...")
+    let url = `https://api.github.com/users/kennjr`
+    if(url != ""){
+
+      lastValueFrom(this.httpClient
+        .get(url, httpOptions)
+      ).then((response: any) => {
+        // Success
+        this.messageFromServer.next("")
+        console.log("The promise was a success")
+
+        this.resultsList.next([response]);
+      },err => {
+        this.messageFromServer.next("An error ocurred " + err.toString())
+      });
+        
+
+      // this.httpClient.get(url, httpOptions).subscribe((response :any) => {
+      //   // if(!response.incomplete_results){
+          
+      //   // }
+        
+      // })
+    }
+  }
 
 }
