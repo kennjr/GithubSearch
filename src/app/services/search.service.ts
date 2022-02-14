@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, lastValueFrom } from 'rxjs';
 
 const httpOptions = {
   headers : new HttpHeaders({
@@ -17,18 +17,36 @@ export class SearchService {
   constructor(private httpClient: HttpClient) { }
 
   searchType:string = "Users";
+  externalSearchType = new BehaviorSubject<any>("")
   resultsList = new BehaviorSubject<any>([]);
   resultsCount = new BehaviorSubject<any>(0);
 
+  messageFromServer = new BehaviorSubject<any>("")
+
   makeSearchRequest (searchstring :string){
+    this.messageFromServer.next("Loading...")
     let url = this.createSearchUrl(searchstring)
     if(url != ""){
-      this.httpClient.get(url, httpOptions).subscribe((response :any) => {
-        if(!response.incomplete_results){
-          this.resultsCount.next(response.total_count)
-          this.resultsList.next(response.items);
-        }
-      })
+
+      lastValueFrom(this.httpClient
+        .get(url, httpOptions)
+      ).then((response: any) => {
+        // Success
+        this.messageFromServer.next("")
+        console.log("The promise was a success")
+        this.resultsCount.next(response.total_count)
+        this.resultsList.next(response.items);
+      },err => {
+        this.messageFromServer.next("An error ocurred " + err.toString())
+      });
+        
+
+      // this.httpClient.get(url, httpOptions).subscribe((response :any) => {
+      //   // if(!response.incomplete_results){
+          
+      //   // }
+        
+      // })
     }
   }
 
@@ -56,6 +74,18 @@ export class SearchService {
 
   updateSearchType(newType :string){
     this.searchType = newType
+    this.externalSearchType.next(newType);
   }
+
+  getExternalSearchType (){
+    // return of(this.searchType);
+    return this.externalSearchType.asObservable();
+  }
+
+  getMessageFromServer (){
+    // return of(this.searchType);
+    return this.messageFromServer.asObservable();
+  }
+  
 
 }
